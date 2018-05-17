@@ -2,11 +2,12 @@ plugins {
     id 'java'
     id 'groovy'
     id 'com.scuilion.syntastic' version '0.3.6-java7'
+    id 'ivy-publish'
 }
 
 group = 'org.c02e.jpgpj'
 archivesBaseName = 'jpgpj'
-version = '0.4'
+version = '0.4.1'
 description = 'Java Pretty Good Privacy Jig'
 
 repositories {
@@ -41,3 +42,20 @@ test {
         showStandardStreams = true
     }
 }
+
+publishing {
+    publications {
+        ivyJava(IvyPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        ivy {
+            // change to point to your repo, e.g. http://my.org/repo
+            // url "$buildDir/repo"
+            layout "ivy"
+            url "${System.properties['user.home']}/.ivy2/local"
+        }
+    }
+}
+
