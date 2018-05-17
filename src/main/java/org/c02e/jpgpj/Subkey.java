@@ -267,6 +267,10 @@ public class Subkey {
         if (publicKey == null) return 0;
 
         int flags = 0;
+
+        System.err.println("Subkey:271> publicKey: ID="+ publicKey.getKeyID() + " isEncryptionKey: " + publicKey.isEncryptionKey());
+
+
         // actually only need POSITIVE_CERTIFICATION (for master key)
         // and SUBKEY_BINDING (for subkeys)
         Iterator<PGPSignature> signatures = publicKey.getSignatures();
@@ -355,7 +359,12 @@ public class Subkey {
      * Sets forSigning etc flags based on key data.
      */
     protected void calculateUsage() throws PGPException {
+
+
+
         int flags = getUsageFlags();
+
+        System.err.println("SubKey:364 calculateUsage: flags: "+ flags);
 
         boolean canSign = (flags & PGPKeyFlags.CAN_SIGN) ==
             PGPKeyFlags.CAN_SIGN;
@@ -370,5 +379,9 @@ public class Subkey {
         forEncryption = canEncrypt;
         forDecryption = canEncrypt &&
             secretKey != null && !secretKey.isPrivateKeyEmpty();
+
+
+        System.err.println("SubKey:380 overriding forEncryption = true");
+        forEncryption = true;
     }
 }
