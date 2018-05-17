@@ -268,7 +268,11 @@ public class Subkey {
 
         int flags = 0;
 
-        System.err.println("Subkey:271> publicKey: ID="+ publicKey.getKeyID() + " isEncryptionKey: " + publicKey.isEncryptionKey());
+
+        if ( publicKey.isEncryptionKey() ) {
+            System.err.println("Subkey:271> publicKey: ID="+ publicKey.getKeyID() + " isEncryptionKey: " + publicKey.isEncryptionKey() + " Setting Flag");
+            flags |= PGPKeyFlags.CAN_ENCRYPT_COMMS;
+        }
 
 
         // actually only need POSITIVE_CERTIFICATION (for master key)
@@ -380,8 +384,7 @@ public class Subkey {
         forDecryption = canEncrypt &&
             secretKey != null && !secretKey.isPrivateKeyEmpty();
 
-
-        System.err.println("SubKey:380 overriding forEncryption = true");
-        forEncryption = true;
+        //System.err.println("SubKey:380 overriding forEncryption = true");
+        //forEncryption = true;
     }
 }
