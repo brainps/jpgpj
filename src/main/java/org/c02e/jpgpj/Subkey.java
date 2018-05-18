@@ -269,8 +269,8 @@ public class Subkey {
         int flags = 0;
 
 
+        System.err.println("Subkey:271> publicKey: ID="+ publicKey.getKeyID() + " isEncryptionKey: " + publicKey.isEncryptionKey() + " Setting Flag");
         if ( publicKey.isEncryptionKey() ) {
-            System.err.println("Subkey:271> publicKey: ID="+ publicKey.getKeyID() + " isEncryptionKey: " + publicKey.isEncryptionKey() + " Setting Flag");
             flags |= PGPKeyFlags.CAN_ENCRYPT_COMMS;
         }
 
@@ -364,11 +364,7 @@ public class Subkey {
      */
     protected void calculateUsage() throws PGPException {
 
-
-
         int flags = getUsageFlags();
-
-        System.err.println("SubKey:364 calculateUsage: flags: "+ flags);
 
         boolean canSign = (flags & PGPKeyFlags.CAN_SIGN) ==
             PGPKeyFlags.CAN_SIGN;
@@ -384,7 +380,5 @@ public class Subkey {
         forDecryption = canEncrypt &&
             secretKey != null && !secretKey.isPrivateKeyEmpty();
 
-        //System.err.println("SubKey:380 overriding forEncryption = true");
-        //forEncryption = true;
     }
 }
