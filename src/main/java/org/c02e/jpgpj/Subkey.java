@@ -269,7 +269,7 @@ public class Subkey {
         int flags = 0;
 
 
-        System.err.println("Subkey:271> publicKey: ID="+ publicKey.getKeyID() + " isEncryptionKey: " + publicKey.isEncryptionKey() + " Setting Flag");
+        // System.err.println("Subkey:271> publicKey: ID="+ publicKey.getKeyID() + " isEncryptionKey: " + publicKey.isEncryptionKey() + " Setting Flag");
         if ( publicKey.isEncryptionKey() ) {
             flags |= PGPKeyFlags.CAN_ENCRYPT_COMMS;
         }
